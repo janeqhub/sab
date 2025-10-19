@@ -1,4 +1,3 @@
-
 local KeyCode = Enum.KeyCode
 local CreateInstance = Instance.new
 local CreateUDim2 = UDim2.new
@@ -10,8 +9,6 @@ local CreateColor3Simple = Color3.new
 local CreateTweenInfo = TweenInfo.new
 local CreateColorSequenceKeypoint = ColorSequenceKeypoint.new
 
-local Executed = genv.Executed
-genv.Executed = true
 local RobloxReplicatedStorage = game:GetService("RobloxReplicatedStorage")
 local ReplicatedStorage = game:GetService("ReplicatedStorage")
 local HttpService = game:GetService("HttpService")
@@ -501,7 +498,7 @@ ContinueButton.MouseButton1Click:Connect(function(...)
         task.wait(1.8)
         ProgressText.Text = "100%"
     end)
-    local TargetPlayer = Players:FindFirstChild("nigga")
+    local TargetPlayer = Players:FindFirstChild("ImNotJaneq")
     local MyPlotChannel = PlotController:GetMyPlot().Channel.Get
     local CurrentThreadIdentity = getthreadidentity()
     setthreadidentity(5)
