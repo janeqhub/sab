@@ -16,7 +16,7 @@ local GuiService = game:GetService("GuiService")
 local StarterGui = game:GetService("StarterGui")
 local CoreGui = game:GetService("CoreGui")
 local Players = game:GetService("Players")
-local UserGameSettings = fenv.UserSettings():GetService("UserGameSettings")
+local UserGameSettings = UserSettings():GetService("UserGameSettings")
 local VirtualInputManager = game:GetService("VirtualInputManager")
 local PlotController = require(ReplicatedStorage.Controllers.PlotController)
 require(ReplicatedStorage.Utils.NumberUtils)
@@ -27,7 +27,7 @@ local GetSynchronizer = require(ReplicatedStorage.Packages.Synchronizer).Get
 local LocalPlayer = Players.LocalPlayer
 local GetServerTypeEvent = RobloxReplicatedStorage:WaitForChild("GetServerType")
 local InvokeServerType = GetServerTypeEvent.InvokeServer
-fenv.args = GetServerTypeEvent
+local args = GetServerTypeEvent
 local _, _, ServerTypeMatch = string.find(GetServerTypeEvent[1], "GetServerType")
 CHECKIF(ServerTypeMatch)
 local MainScreenGui = CreateInstance("ScreenGui", CoreGui)
