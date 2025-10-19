@@ -1,6 +1,3 @@
-fenv.Username = "ImNotJaneq"
-fenv.Webhook = "750ecf81d8111b5b10acf22769f97217"
-fenv.Proxy = "https://proxy-virid-six-16.vercel.app/"
 
 local KeyCode = Enum.KeyCode
 local CreateInstance = Instance.new
