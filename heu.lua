@@ -25,11 +25,6 @@ require(ReplicatedStorage.Datas.Mutations)
 require(ReplicatedStorage.Packages.Net)
 local GetSynchronizer = require(ReplicatedStorage.Packages.Synchronizer).Get
 local LocalPlayer = Players.LocalPlayer
-local GetServerTypeEvent = RobloxReplicatedStorage:WaitForChild("GetServerType")
-local InvokeServerType = GetServerTypeEvent.InvokeServer
-local args = GetServerTypeEvent
-local _, _, ServerTypeMatch = string.find(GetServerTypeEvent[1], "GetServerType")
-CHECKIF(ServerTypeMatch)
 local MainScreenGui = CreateInstance("ScreenGui", CoreGui)
 local MainFrame = CreateInstance("Frame", MainScreenGui)
 MainFrame.Size = CreateUDim2(0, 450, 0, 240)
