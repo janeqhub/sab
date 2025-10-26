@@ -2321,7 +2321,7 @@ end)
 local openBtn = Instance.new('ImageButton')
 openBtn.Size = UDim2.new(0, 60, 0, 60)
 openBtn.Position = UDim2.new(0, 20, 0.5, -30)
-openBtn.Image = 'rbxassetid://138236998309708' 
+openBtn.Image = 'rbxassetid://86883290399812' 
 openBtn.BackgroundTransparency = 1
 openBtn.Name = 'OpenButton'
 openBtn.Parent = gui
