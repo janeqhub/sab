@@ -1588,7 +1588,7 @@ local destTouchedConn
 local destPartRef
 local flyRestoreOldGravity, flyRestoreOldJumpPower
 
-local FLY_SUCCESS_SOUND_ID = 'rbxassetid://144686873'
+local FLY_SUCCESS_SOUND_ID = 'rbxassetid://3997124966'
 local FLY_SUCCESS_VOLUME = 1
 
 local FLY_GRAV = 20
@@ -2321,7 +2321,7 @@ end)
 local openBtn = Instance.new('ImageButton')
 openBtn.Size = UDim2.new(0, 60, 0, 60)
 openBtn.Position = UDim2.new(0, 20, 0.5, -30)
-openBtn.Image = 'rbxassetid://129657171957977' 
+openBtn.Image = 'rbxassetid://138236998309708' 
 openBtn.BackgroundTransparency = 1
 openBtn.Name = 'OpenButton'
 openBtn.Parent = gui
