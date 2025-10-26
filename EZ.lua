@@ -8,7 +8,7 @@
 ----------------------------------------------------------------
 -- PERSISTÊNCIA (somente BEST / SECRET / BASE)
 ----------------------------------------------------------------
-local CONFIG_DIR = 'CheredHub'
+local CONFIG_DIR = 'AstroHub'
 local CONFIG_FILE = CONFIG_DIR .. '/config.json'
 local defaultConfig = { espBest = false, espSecret = false, espBase = false }
 local currentConfig = {}
@@ -654,7 +654,7 @@ end)
 
 local title = Instance.new('TextLabel', menu)
 title.Size = UDim2.new(1, 0, 0, 32)
-title.Text = '🛡️ CHERED HUB 🛡️'
+title.Text = '💫 ASTRO HUB 💫'
 title.TextColor3 = Color3.fromRGB(120, 200, 255)
 title.Font = Enum.Font.GothamBold
 title.TextSize = 20
@@ -666,7 +666,7 @@ local tiktokLabel = Instance.new('TextLabel', menu)
 tiktokLabel.Size = UDim2.new(1, -20, 0, 18)
 tiktokLabel.Position = UDim2.new(0, 10, 0, 32)
 tiktokLabel.BackgroundTransparency = 1
-tiktokLabel.Text = 'TIKTOK: @dexterman03'
+tiktokLabel.Text = 'DISCORD: discord.gg/wR3rgRaDjN'
 tiktokLabel.TextColor3 = Color3.fromRGB(170, 170, 170)
 tiktokLabel.Font = Enum.Font.Gotham
 tiktokLabel.TextSize = 13
@@ -847,7 +847,7 @@ end)
 
 local btnDiscordMain = createButton(menu, UDim2.new(0.9, 0, 0, 30), UDim2.new(0.05, 0, 0, aimbotY + 30 + 12), '💬 DISCORD', Enum.Font.GothamBold, Color3.fromRGB(120, 180, 255), 12)
 btnDiscordMain.MouseButton1Click:Connect(function()
-    local link = 'https://discord.gg/qvVEZt3q88' 
+    local link = 'https://discord.gg/wR3rgRaDjN' 
     local copied = false
     if typeof(setclipboard) == 'function' then
         pcall(function()
@@ -1155,7 +1155,7 @@ local function performDesyncLockdown(duration, onComplete)
     label.Size = UDim2.new(1, 0, 0, 120)
     label.Position = UDim2.new(0, 0, 0.45, -60)
     label.BackgroundTransparency = 1
-    label.Text = '🛡️ Chered is desyncing you 🛡️'
+    label.Text = '💫 Astro Hub is desyncing you... 💫'
     label.TextColor3 = Color3.fromRGB(255, 255, 255)
     label.Font = Enum.Font.GothamBold
     label.TextSize = 36
@@ -1204,7 +1204,7 @@ local function performDesyncLockdown(duration, onComplete)
             end
         end)
 
-        playSoundOptimized('rbxassetid://144686873', 1)
+        playSoundOptimized('rbxassetid://3997124966', 2)
 
         notify('Desync', 'Desync Successful! 🛡️', 4)
         showStatus('Desync Successful! 🛡️', Color3.fromRGB(120, 255, 140))
@@ -2386,7 +2386,7 @@ makeDraggable(menu)
 makeDraggable(panel)
 makeDraggable(openBtn)
 
-notify('🛡️ Chered Hub', 'Script activated! ✨', 5)
+notify('Astro Hub', 'Script activated! ✨', 5)
 
 ----------------------------------------------------------------
 -- FINAL: Script otimizado para mobile
